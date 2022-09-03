@@ -18,8 +18,8 @@ set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 cmd open ${{
     case $(file --mime-type "$(readlink -f $f)" -b) in
 	image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        text/html) setsid -f google-chrome-stable $f >/dev/null 2>&1 ;;
-        text/*) $EDITOR $fx;;
+        text/html) setsid -f brave $f >/dev/null 2>&1 ;;
+        text/*) setsid -f emacsclient -c -a emacs $fx >/dev/null 2>&1 ;;
 	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
 	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | setsid -f sxiv -aio 2>/dev/null | lf-select & ;;
